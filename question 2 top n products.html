@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top N Products AFFORDMED</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Top N Products</h1>
+        <div id="filters">
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="">All</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home">Home</option>
+                <!-- Add more categories as needed -->
+            </select>
+
+            <label for="sort">Sort By:</label>
+            <select id="sort">
+                <option value="price">Price</option>
+                <option value="rating">Rating</option>
+                <option value="discount">Discount</option>
+            </select>
+
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Search products...">
+        </div>
+        <div id="products" class="products-grid"></div>
+    </div>
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: 'Laptop',
+                company: 'Dell',
+                category: 'Electronics',
+                price: 800,
+                rating: 4.5,
+                discount: 10,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 2,
+                name: 'Smartphone',
+                company: 'Samsung',
+                category: 'Electronics',
+                price: 500,
+                rating: 4.2,
+                discount: 15,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 5,
+                name: 'Pixel Phone',
+                company: 'Google',
+                category: 'Electronics',
+                price: 600,
+                rating: 4.7,
+                discount: 12,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 5,
+                name: 'Pixel Phone',
+                company: 'Google',
+                category: 'Electronics',
+                price: 600,
+                rating: 4.7,
+                discount: 12,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 3,
+                name: 'Shoes',
+                company: 'Nike',
+                category: 'Fashion',
+                price: 120,
+                rating: 4.0,
+                discount: 20,
+                availability: false,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 1,
+                name: 'Laptop',
+                company: 'Dell',
+                category: 'Electronics',
+                price: 800,
+                rating: 4.5,
+                discount: 10,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 4,
+                name: 'Apple Watch',
+                company: 'Apple',
+                category: 'Electronics',
+                price: 400,
+                rating: 4.8,
+                discount: 5,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 5,
+                name: 'Pixel Phone',
+                company: 'Google',
+                category: 'Electronics',
+                price: 600,
+                rating: 4.7,
+                discount: 12,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            {
+                id: 1,
+                name: 'Laptop',
+                company: 'Dell',
+                category: 'Electronics',
+                price: 800,
+                rating: 4.5,
+                discount: 10,
+                availability: true,
+                // image: 'https://via.placeholder.com/150'
+            },
+            // Add more products as needed
+        ];
+
+          function displayProducts(products) {
+            const productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                
+                    <h2>${product.name}</h2>
+                    <p>Company: ${product.company}</p>
+                    <p>Category: ${product.category}</p>
+                    <p>Price: $${product.price}</p>
+                    <p>Rating: ${product.rating}</p>
+                    <p>Discount: ${product.discount}%</p>
+                    <p>Availability: ${product.availability ? 'In Stock' : 'Out of Stock'}</p>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        function filterAndSortProducts() {
+            const category = document.getElementById('category').value;
+            const sort = document.getElementById('sort').value;
+            const search = document.getElementById('search').value.toLowerCase();
+
+            let filteredProducts = products;
+
+            if (category) {
+                filteredProducts = filteredProducts.filter(product => product.category === category);
+            }
+
+            if (search) {
+                filteredProducts = filteredProducts.filter(product => product.name.toLowerCase().includes(search));
+            }
+
+            if (sort) {
+                filteredProducts.sort((a, b) => a[sort] > b[sort] ? 1 : -1);
+            }
+
+            displayProducts(filteredProducts);
+        }
+
+        document.getElementById('category').addEventListener('change', filterAndSortProducts);
+        document.getElementById('sort').addEventListener('change', filterAndSortProducts);
+        document.getElementById('search').addEventListener('input', filterAndSortProducts);
+
+        // Initial display
+        displayProducts(products);
+    </script>
+</body>
+</html>
