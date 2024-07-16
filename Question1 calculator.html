@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFFORDMED CALCULATOR</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #614242;
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .calc-container {
+            background-color: #5ec5c5;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 15px;
+            text-align: right;
+            font-size: 28px;
+            padding: 15px;
+            border: 1px solid #72766e44;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 20px;
+            border: none;
+            background-color: #dde0e6;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #d9d9d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="calc-container">
+        <input type="text" id="display" disabled>
+        <div class="btn-grid">
+            <button class="btn" onclick="clearScreen()">C</button>
+            <button class="btn" onclick="deleteChar()">DEL</button>
+            <button class="btn" onclick="appendChar('(')">(</button>
+            <button class="btn" onclick="appendChar(')')">)</button>
+            <button class="btn" onclick="appendChar('1')">1</button>
+            <button class="btn" onclick="appendChar('2')">2</button>
+            <button class="btn" onclick="appendChar('3')">3</button>
+            <button class="btn" onclick="appendChar('/')">/</button>
+            <button class="btn" onclick="appendChar('4')">4</button>
+            <button class="btn" onclick="appendChar('5')">5</button>
+            <button class="btn" onclick="appendChar('6')">6</button>
+            <button class="btn" onclick="appendChar('*')">*</button>
+            <button class="btn" onclick="appendChar('7')">7</button>
+            <button class="btn" onclick="appendChar('8')">8</button>
+            <button class="btn" onclick="appendChar('9')">9</button>
+            <button class="btn" onclick="appendChar('-')">-</button>
+            <button class="btn" onclick="appendChar('0')">0</button>
+            <button class="btn" onclick="appendChar('.')">.</button>
+            <button class="btn" onclick="computeResult()">=</button>
+            <button class="btn" onclick="appendChar('+')">+</button>
+        </div>
+    </div>
+    <script>
+        function clearScreen() {
+            document.getElementById('display').value = '';
+        }
+
+        function deleteChar() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function appendChar(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+        }
+
+        function computeResult() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
